@@ -1,57 +1,103 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Mis XV - Bianca</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* Reset básico */
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
+    html, body {
       margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-
-      /* FONDO */
-      background: url("./fondo.png") center/cover no-repeat fixed;
-
-      /* Centrado */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      /* Para que en pantallas altas no quede “apretado” */
-      padding: 24px 12px;
-    }
-
-    /* Contenedor general para mantener proporciones */
-    .wrap {
-      width: min(520px, 92vw);
-      display: flex;
-      justify-content: center;
-    }
-
-    /* Tarjeta invisible (solo para dar “zona segura” si hace falta) */
-    .card {
+      padding: 0;
       width: 100%;
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
+      height: 100%;
+      font-family: Georgia, serif;
     }
 
-    /* En móvil, evitamos fixed para que iOS no haga cosas raras */
-    @media (max-width: 900px) {
-      body { background-attachment: scroll; }
+    body {
+      background: url("fondo.png") no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      border-radius: 24px;
+      padding: 40px 30px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2em;
+    }
+
+    h2 {
+      margin-top: 10px;
+      font-size: 1.4em;
+      font-weight: normal;
+    }
+
+    p {
+      margin-top: 16px;
+      font-size: 1em;
+      line-height: 1.4em;
+    }
+
+    .fecha {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+
+    .ubicacion {
+      margin-top: 16px;
+      display: inline-block;
+      padding: 10px 20px;
+      background: #5f8f7a;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    .nota {
+      margin-top: 20px;
+      font-size: 0.9em;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
-      <!-- No ponemos nada encima.
-           Porque tu diseño ya está completo dentro de fondo.png -->
+  <div class="card">
+    <h1>Mis XV</h1>
+    <h2>Bianca</h2>
+
+    <p>
+      Hay momentos que marcan un antes y un después.  
+      Hoy comienzo una nueva etapa y quiero celebrarla rodeada de personas especiales.
+    </p>
+
+    <div class="fecha">
+      Sábado 7 de Febrero — 20:30 hs
+    </div>
+
+    <p>Víctor Hugo 5150, Francisco Álvarez</p>
+
+    <a class="ubicacion" href="https://maps.google.com/?q=Victor+Hugo+5150+Francisco+Alvarez" target="_blank">
+      📍 Ver ubicación
+    </a>
+
+    <div class="nota">
+      Vestimenta sugerida: Elegante sport.<br>
+      El color verde pistacho está reservado exclusivamente para la quinceañera.
     </div>
   </div>
 </body>
