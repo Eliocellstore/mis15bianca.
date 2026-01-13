@@ -2,148 +2,116 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mis XV</title>
 
   <style>
-    *{ box-sizing:border-box; }
-
-    :root{
-      --verde:#3f7b6f;
-      --blanco: rgba(255,255,255,.78);
-
-      /* ESTE ES EL “ESPACIO LIBRE” QUE NO HAY QUE ROMPER */
-      --subida-pc: 0px;     /* en PC (si querés subir/bajar los overlays) */
-      --subida-movil: 0px;  /* en celular */
-    }
+    * { box-sizing: border-box; }
 
     body{
       margin:0;
-      min-height:100vh;
+      background:#f2f2f2;
       display:flex;
       justify-content:center;
-      align-items:center;
-      padding: 24px 14px;
-      background:#f2f2f2;
+      padding:18px 0;
       font-family: Georgia, "Times New Roman", serif;
     }
 
-    /* Card = la invitación completa */
     .card{
-      width: min(420px, 94vw);
-      aspect-ratio: 3 / 5;              /* mantiene proporción similar a tu captura */
-      border-radius: 22px;
-      overflow:hidden;
-      position:relative;
-
-      background-image: url("./fondo.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      box-shadow: 0 18px 45px rgba(0,0,0,.25);
+      width: 390px;
+      height: 700px;
+      background: url("./fondo.png") center / cover no-repeat;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
     }
 
-    /* Contenedor overlays (contador + vestimenta + botón) */
-    .overlays{
+    .overlay{
       position:absolute;
       left:0;
       right:0;
-      bottom: 18px;                     /* margen inferior */
-      padding: 0 22px;
+      bottom:18px;
+      padding:0 22px;
       display:flex;
       flex-direction:column;
-      gap: 14px;
-
-      transform: translateY(var(--subida-movil));
+      gap:10px; /* más compacto */
     }
 
-    /* Pastillas blancas (contador y vestimenta) */
     .pill{
-      background: var(--blanco);
+      background: rgba(255,255,255,.70); /* un toque más transparente */
       border-radius: 999px;
-      padding: 14px 18px;
+      padding: 10px 14px;  /* ACHICA alto */
       text-align:center;
-      font-size: 18px;
-      line-height: 1.25;
-      box-shadow: 0 10px 22px rgba(0,0,0,.12);
-      backdrop-filter: blur(2px);
+      font-size:16px;      /* ACHICA texto */
+      line-height:1.2;     /* ACHICA alto total */
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+    }
+
+    /* Temporizador todavía más chico */
+    #countdown{
+      font-size:15px;
+      padding: 9px 14px;
     }
 
     .pill strong{ font-weight:700; }
 
-    /* Botón */
     .btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-
-      width:100%;
-      padding: 18px 18px;
-      border-radius: 999px;
-
-      background: var(--verde);
+      background:#3f7b6f;
       color:#fff;
+      text-align:center;
+      padding:14px;        /* ACHICA botón */
+      border-radius:999px;
+      font-size:18px;      /* ACHICA texto botón */
       font-weight:700;
-      font-size: 20px;
       text-decoration:none;
-
-      box-shadow: 0 14px 28px rgba(0,0,0,.18);
-    }
-
-    /* PC: si el “espacio libre” te cambia, se ajusta SOLO acá */
-    @media (min-width: 900px){
-      .overlays{
-        transform: translateY(var(--subida-pc));
-      }
+      box-shadow: 0 14px 28px rgba(0,0,0,.16);
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="overlays">
-      <div id="countdown" class="pill">⏳ Cargando contador...</div>
 
-      <div class="pill">
-        <strong>Vestimenta sugerida:</strong> <strong>Elegante sport</strong><br/>
-        El color verde pistacho está reservado exclusivamente para la quinceañera.
-      </div>
+<div class="card">
 
-      <a class="btn" target="_blank" rel="noopener"
-         href="https://www.google.com/maps/search/?api=1&query=V%C3%ADctor%20Hugo%205150%2C%20Francisco%20%C3%81lvarez">
-        📍 Ver ubicación
-      </a>
+  <div class="overlay">
+    <div id="countdown" class="pill">⏳ Cargando...</div>
+
+    <div class="pill">
+      <strong>Vestimenta sugerida:</strong> Elegante sport<br>
+      El color verde pistacho está reservado exclusivamente para la quinceañera.
     </div>
+
+    <a class="btn" target="_blank"
+       href="https://www.google.com/maps/search/?api=1&query=V%C3%ADctor%20Hugo%205150%2C%20Francisco%20%C3%81lvarez">
+      📍 Ver ubicación
+    </a>
   </div>
 
-  <script>
-    // Fecha del evento (Argentina) — 7 Feb 2026 20:30
-    const eventDate = new Date(2026, 1, 7, 20, 30);
+</div>
 
-    const el = document.getElementById("countdown");
-    const pad = (n) => String(n).padStart(2,"0");
+<script>
+  const eventDate = new Date(2026,1,7,20,30);
+  const el = document.getElementById("countdown");
 
-    function tick(){
-      const now = new Date();
-      let diff = eventDate - now;
-
-      if(diff <= 0){
-        el.textContent = "🎉 ¡Hoy es el día!";
-        return;
-      }
-
-      const totalMinutes = Math.floor(diff / 60000);
-      const days = Math.floor(totalMinutes / (60*24));
-      const hours = Math.floor((totalMinutes % (60*24)) / 60);
-      const mins = totalMinutes % 60;
-
-      el.textContent = `⏳ Faltan ${days} días y ${pad(hours)} horas`;
+  function tick(){
+    const now = new Date();
+    let diff = eventDate - now;
+    if(diff <= 0){
+      el.textContent = "🎉 ¡Hoy es el día!";
+      return;
     }
 
-    tick();
-    setInterval(tick, 1000);
-  </script>
+    const mins = Math.floor(diff / 60000);
+    const days = Math.floor(mins / 1440);
+    const hours = Math.floor((mins % 1440) / 60);
+
+    el.textContent = `⏳ Faltan ${days} días y ${hours} horas`;
+  }
+
+  tick();
+  setInterval(tick, 60000);
+</script>
+
 </body>
 </html>
